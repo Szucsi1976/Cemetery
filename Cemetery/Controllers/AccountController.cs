@@ -48,11 +48,11 @@ namespace Cemetery.Controllers
         }
         public async Task<IActionResult> Register()
         {
-            if (!_roleManager.RoleExistsAsync(Helper.Admin).GetAwaiter().GetResult())
+           /* if (!_roleManager.RoleExistsAsync(Helper.Admin).GetAwaiter().GetResult())
             {
                await _roleManager.CreateAsync(new IdentityRole(Helper.Admin));
                await _roleManager.CreateAsync(new IdentityRole(Helper.Curious));
-            }
+            } */
             return View();
         }
 
@@ -72,7 +72,14 @@ namespace Cemetery.Controllers
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, model.RoleName);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    if (!User.IsInRole(Helper.Admin))
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                    }
+                    else
+                    {
+                        TempData["newUserSignUp"] = user.Name;      //Ez figyelmezteti az új user regisztrálására
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 foreach(var error in result.Errors) {

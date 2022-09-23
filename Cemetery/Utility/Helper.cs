@@ -8,15 +8,24 @@ namespace Cemetery.Utility
 {
     public static class Helper
     {
-        public static string Admin = "Adminisztrátor";
-        public static string Curious = "Érdeklődő";
-        public static List<SelectListItem> GetRolesForDropDown()
+        public const string Admin = "Adminisztrátor";
+        public const string Curious = "Érdeklődő";
+        public static List<SelectListItem> GetRolesForDropDown(bool isAdmin)
         {
-            return new List<SelectListItem>()
+            if (isAdmin)
             {
-                new SelectListItem{Value = Helper.Admin, Text=Helper.Admin},
-                new SelectListItem{Value = Helper.Curious, Text=Helper.Curious}
-            };
+                return new List<SelectListItem>()
+                {
+                    new SelectListItem{Value = Helper.Admin, Text=Helper.Admin},
+                    new SelectListItem{Value = Helper.Curious, Text=Helper.Curious}
+                };
+            }
+            else return new List<SelectListItem>()
+            {
+                {
+                    new SelectListItem{Value = Helper.Curious, Text=Helper.Curious}
+                }
+            };    
         }
     }
 }

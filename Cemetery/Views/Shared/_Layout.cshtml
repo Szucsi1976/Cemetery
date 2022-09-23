@@ -11,21 +11,60 @@
     <header>
         <nav class="navbar navbar-inverse navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
             <div class="container">
-                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cemetery</a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-row-reverse">
                     <partial name="_LoginPartial" />
-                    @* <ul class="navbar-nav flex-grow-1">
-                         <li class="nav-item">
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                         </li>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                              <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                         </li>
-                       </ul>*@
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Főoldal</a>
+                        </li>
+                        @if (User.IsInRole(Cemetery.Utility.Helper.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Religion" asp-action="Index">Vallások</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Undertaker" asp-action="Index">Temetkezési vállalatok</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Grave" asp-action="Index">Sírok</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Burial" asp-action="Index">Temetések</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Renter" asp-action="Index">Sírmegváltók</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Redemption" asp-action="Index">Megváltások</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Dead" asp-action="Index">Elhunytak</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Settlement" asp-action="Index">Irányítószámok</a>
+                            </li>
+                        }
+                        else @if (User.IsInRole(Cemetery.Utility.Helper.Curious))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Redemption" asp-action="Index">Sírmegváltásaim</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
+@if (TempData.ContainsKey("newUserSignUp")) { 
+    <div class="container">
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+            <strong> Account készült a(z) @TempData["newUserSignUp"].ToString() felhasználónak.</strong>
+        </div>
+    </div>
+}
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@if (User.IsInRole(Cemetery.Utility.Helper.Admin)){ 
+    <div class="row">
+        <div class="col-3" offset-5>
+            <a asp-controller="Account" asp-action="Register" class="btn-secondary form-control">Regisztráció</a>
+        </div>
+    </div>
+}

@@ -1,0 +1,77 @@
+﻿@model Cemetery.Models.Grave
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="GraveId" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Sírhely törlése / felszámolása</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="GraveType"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="GraveType" disabled class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Size"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Size" disabled class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Row"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Row" disabled class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Parcel"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Parcel" disabled class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Side"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Side" disabled class="form-control" />
+                    </div>  
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-danger w-100" value="Töröl" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100"> Vissza </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

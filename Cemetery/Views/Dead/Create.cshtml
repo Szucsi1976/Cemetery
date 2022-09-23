@@ -1,0 +1,135 @@
+﻿@model Cemetery.Models.ViewModels.DeadVM
+
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Elhunyt adatainak felvétele</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadBirthLastName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Dead.DeadBirthLastName" class="form-control" />
+                        <span asp-validation-for="Dead.DeadBirthLastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadBirthFirstName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Dead.DeadBirthFirstName" class="form-control" />
+                        <span asp-validation-for="Dead.DeadBirthFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadMothersName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Dead.DeadMothersName" class="form-control" />
+                        <span asp-validation-for="Dead.DeadMothersName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadBirthSettlementId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Dead.DeadBirthSettlementId" asp-items="@Model.TypeDropDownSettlement" class="form-control">
+                            <option selected>-- Válasszon születési helyet!--</option>
+                        </select>
+                        <span asp-validation-for="Dead.DeadBirthSettlementId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadBirthDate"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Dead.DeadBirthDate" class="form-control" />
+                        <span asp-validation-for="Dead.DeadBirthDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadDeathDate"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Dead.DeadDeathDate" class="form-control" />
+                        <span asp-validation-for="Dead.DeadDeathDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadReligionId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Dead.DeadReligionId" asp-items="@Model.TypeDropDownReligion" class="form-control">
+                            <option selected>-- Válasszon vallást!--</option>
+                        </select>
+                        <span asp-validation-for="Dead.DeadReligionId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadCauseOfDeath"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Dead.DeadCauseOfDeath" class="form-control" />
+                        <span asp-validation-for="Dead.DeadCauseOfDeath" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadGraveId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Dead.DeadGraveId" asp-items="@Model.TypeDropDownGrave" class="form-control">
+                            <option selected>-- Válasszon sírhelyet!--</option>
+                        </select>
+                        <span asp-validation-for="Dead.DeadGraveId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Dead.DeadBurialId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Dead.DeadBurialId" asp-items="@Model.TypeDropDownBurial" class="form-control">
+                            <option selected>-- Válasszon temetést!--</option>
+                        </select>
+                        <span asp-validation-for="Dead.DeadBurialId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Felvesz" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100"> Vissza </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+            </div>
+        </div>
+
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

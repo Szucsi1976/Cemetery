@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Cemetery.Models.Dead>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Elhunytak listája</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Dead" asp-action="Create" class="btn btn-primary">
+                Új elhunyt felvétele
+            </a>
+        </div>
+    </div>
+    <br /> <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table-bordered table-striped" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>
+                        Név
+                    </th>
+                    <th>
+                        Anyja neve
+                    </th>
+                    <th>
+                        Születési hely
+                    </th>
+                    <th>
+                        Születési dátum
+                    </th>
+                    <th>
+                        Sírhely
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                <tr>
+                    <td width="15%"> @obj.DeadBirthLastName @obj.DeadBirthFirstName       </td>
+                    <td width="15%"> @obj.DeadMothersName                                 </td>
+                    <td width="15%"> @obj.Settlement.Station   @obj.Settlement.PostalCode </td>
+                    <td width="15%"> @obj.DeadBirthDate       </td>
+                    <td width="15%"> @obj.Grave.Row. sor, @obj.Grave.Side oldal, @obj.Grave.Parcel. parcella, @obj.Grave.GraveType típus, @obj.Grave.Size méret </td>
+                    <td class="text-center">
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Dead" asp-route-Id="@obj.DeadId" asp-action="Edit" class="btn btn-primary mx-2">
+                                Szerkeszt
+                            </a>
+                            <a asp-controller="Dead" asp-route-Id="@obj.DeadId" asp-action="Delete" class="btn btn-danger mx-2">
+                                Töröl
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nincsenek rögzített elhunytak.</p>
+    }
+</div>

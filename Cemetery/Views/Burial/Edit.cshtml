@@ -1,0 +1,79 @@
+﻿@model Cemetery.Models.ViewModels.BurialVM
+
+<form method="post">
+    <input asp-for="Burial.FuneralId" hidden />
+    <div class="border p-3">
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Temetés adatainak módosítása</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Burial.FuneralName"></label>
+                    </div>
+                    <div class="col-8">
+                        <div class="col-8">
+                            <input asp-for="Burial.FuneralName" class="form-control" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Burial.FuneralDateTime"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Burial.FuneralDateTime" asp-format="{0:dd'/'MM'/'yyyy}">
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8">
+                        <label asp-for="Burial.BurialUndertakerId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Burial.BurialUndertakerId" asp-items="@Model.TypeDropDownUndertaker" class="form-control">
+                            <option selected>-- Válasszon születési helyet!--</option>
+                        </select>
+                        <span asp-validation-for="Burial.BurialUndertakerId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Burial.DeathBurialMethod"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Burial.DeathBurialMethod" class="form-control" asp-items="Html.GetEnumSelectList<burialMethod>()"></select>
+                        <span asp-validation-for="Burial.DeathBurialMethod" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Frissít" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100"> Vissza </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+            </div>
+        </div>
+
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
