@@ -28,17 +28,24 @@ namespace Cemetery.Controllers
         {
             return View();
         }
-        
+
         //Post-CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Grave obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Graves.Add(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _db.Graves.Add(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = Utility.Helper.CreateErrorMessage;
             }
             return View(obj);
         }
@@ -65,21 +72,32 @@ namespace Cemetery.Controllers
         //Post Edit
         public IActionResult Edit(Grave obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Graves.Update(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _db.Graves.Update(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = Utility.Helper.EditErrorMessage;
             }
             return View(obj);
         }
 
         // Get Delete
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id, bool? saveChangesError)
         {
             if (id == null || id < 1)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = Utility.Helper.DeleteErrorMessage;
             }
             var obj = _db.Graves.Find(id);
             if (obj == null)
@@ -100,8 +118,15 @@ namespace Cemetery.Controllers
             {
                 return NotFound();
             }
-            _db.Graves.Remove(obj);
-            _db.SaveChanges();
+            try
+            {
+                _db.Graves.Remove(obj);
+                _db.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("Delete", new { id = GraveId, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
     }

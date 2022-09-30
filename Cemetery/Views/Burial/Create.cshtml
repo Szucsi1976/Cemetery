@@ -1,8 +1,11 @@
 ﻿@model Cemetery.Models.ViewModels.BurialVM
+@if (@ViewBag.Errormessage != null)
+{<p class="error">@ViewBag.Errormessage</p>}
+
 
 <form method="post" asp-action="Create">
     <div class="border p-3">
-       
+
         <div class="form-group row">
             <h2 class="text-info pl-3">Új temetés kiírása</h2>
         </div>

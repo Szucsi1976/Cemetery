@@ -2,7 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (TempData.ContainsKey("newUserSignUp")) { 
+@if (TempData.ContainsKey("newUserSignUp"))
+{
     <div class="container">
         <div class="alert alert-success alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
@@ -11,15 +12,51 @@
     </div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-@if (User.IsInRole(Cemetery.Utility.Helper.Admin)){ 
+@if (User.IsInRole(Cemetery.Utility.Helper.Admin))
+{
     <div class="row">
         <div class="col-3" offset-5>
             <a asp-controller="Account" asp-action="Register" class="btn-secondary form-control">Regisztráció</a>
         </div>
     </div>
 }
+
+<div class="text-center">
+    <h1> A Jászberényi Református Egyházközség temetője</h1>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-sm-4">
+        <ul>
+            <li class="list-group-item list-group-item-warning">
+                Közérdekű adatok
+            </li>
+            <li class="list-group-item list-group-item-primary">
+                Temető címe: 5100 Jászberény, Nyíl utca 2.
+            </li>
+            <li class="list-group-item list-group-item-primary">
+                Kapcsolódó gyülekezet: Jászberényi Reformáus Egyházközség
+            </li>
+            <li class="list-group-item list-group-item-primary">
+                Temetéssel kapcsolatos ügyintézés:
+                (06 57) 400 404 / (06 30) 479 3880
+            </li>
+            <li class="list-group-item list-group-item-primary">
+                E-mail: jaszbereny.ref@gmail.com
+            </li>
+            <li class="list-group-item list-group-item-primary">
+                Üzemeltető vállalat: Selena Kft. Iusta
+            </li>
+        </ul>
+    </div>
+    <div class="col-8">
+        <p class="p-3 mb-2 bg-primary text-white">
+            Tudjuk pedig, hogy ha földi sátorunk összeomlik, van Istentől készített hajlékunk, <br /> nem kézzel csinált, hanem örökkévaló mennyei házunk.<br />
+            2 Korinthusbeliek 5: 1–5
+        </p>
+    </div>
+</div>
+    
+
+

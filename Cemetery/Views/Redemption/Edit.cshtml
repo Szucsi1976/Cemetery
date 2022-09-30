@@ -1,4 +1,7 @@
 ﻿@model Cemetery.Models.ViewModels.RedemptionVM
+@if (@ViewBag.Errormessage != null)
+{<p class="error">@ViewBag.Errormessage</p>}
+
 
 <form method="post">
     <input asp-for="Redemption.RedemptionId" hidden />
@@ -67,10 +70,10 @@
                 <div class="form-group row">
                     <div class="col-8 offset-4 row">
 
-                        <div class="col">
+                        <div class="col-4">
                             <input type="submit" class="btn btn-info w-100" value="Frissít" />
                         </div>
-                        <div class="col">
+                        <div class="col-4">
                             <a asp-action="Index" class="btn btn-success w-100"> Vissza </a>
                         </div>
                     </div>

@@ -34,11 +34,18 @@ namespace Cemetery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Undertaker obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Undertakers.Add(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _db.Undertakers.Add(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = Utility.Helper.CreateErrorMessage;
             }
             return View(obj);
         }
@@ -65,21 +72,32 @@ namespace Cemetery.Controllers
         //Post Edit
         public IActionResult Edit(Undertaker obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Undertakers.Update(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _db.Undertakers.Update(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = Utility.Helper.EditErrorMessage;
             }
             return View(obj);
         }
 
         // Get Delete
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id, bool? saveChangesError)
         {
             if (id == null || id < 1)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = Utility.Helper.DeleteErrorMessage;
             }
             var obj = _db.Undertakers.Find(id);
             if (obj == null)
@@ -100,8 +118,15 @@ namespace Cemetery.Controllers
             {
                 return NotFound();
             }
-            _db.Undertakers.Remove(obj);
-            _db.SaveChanges();
+            try
+            {
+                _db.Undertakers.Remove(obj);
+                _db.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("Delete", new { id = UndertakerId, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
     }

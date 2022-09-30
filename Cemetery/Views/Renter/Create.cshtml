@@ -1,4 +1,6 @@
 ﻿@model Cemetery.Models.ViewModels.RenterVM
+@if (@ViewBag.Errormessage != null)
+{<p class="error">@ViewBag.Errormessage</p>}
 
 <form method="post" asp-action="Create">
     <div class="border p-3">
@@ -25,14 +27,14 @@
                         <input asp-for="Renter.RenterFirstname" class="form-control" />
                         <span asp-validation-for="Renter.RenterFirstname" class="text-danger"></span>
                     </div>
-                </div> 
+                </div>
                 <div class="form-group row">
                     <div class="col-3">
                         <label asp-for="Renter.RenterSettlementId"></label>
                     </div>
                     <div class="col-3">
-                        <select asp-for="Renter.RenterSettlementId" asp-items="@Model.TypeDropDown" class="form-control" >
-                        <option selected>-- Válasszon települést!--</option>
+                        <select asp-for="Renter.RenterSettlementId" asp-items="@Model.TypeDropDown" class="form-control">
+                            <option selected>-- Válasszon települést!--</option>
                         </select>
                         <span asp-validation-for="Renter.RenterSettlementId" class="text-danger"></span>
                     </div>

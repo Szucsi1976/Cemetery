@@ -1,4 +1,6 @@
 ﻿@model Cemetery.Models.Religion
+@if (@ViewBag.Errormessage != null)
+{<p class="error">@ViewBag.Errormessage</p>}
 
 <form method="post" asp-action="Create">
     <div class="border p-3">

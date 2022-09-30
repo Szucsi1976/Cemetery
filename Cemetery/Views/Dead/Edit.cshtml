@@ -1,4 +1,6 @@
 ﻿@model Cemetery.Models.ViewModels.DeadVM
+@if (@ViewBag.Errormessage != null)
+{<p class="error">@ViewBag.Errormessage</p>}
 
 <form method="post">
     <input asp-for="Dead.DeadId" hidden />
@@ -127,7 +129,7 @@
                     @* Keep this empty *@
                 </div>
             </div>
-            </div>
+        </div>
 </form>
 @section Scripts{
     @{

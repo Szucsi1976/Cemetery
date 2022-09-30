@@ -20,9 +20,6 @@
             <thead>
                 <tr>
                     <th>
-                        Azonosító
-                    </th>
-                    <th>
                         Temettető neve (magán vagy jogi személy)
                     </th>
                     <th>
@@ -40,10 +37,9 @@
                 @foreach (var obj in Model)
                 {
                 <tr>
-                    <td width="10%"> @obj.FuneralId                  </td>
                     <td width="20%"> @obj.FuneralName                </td>
                     <td width="20%"> @obj.FuneralDateTime            </td>
-                    <td width="10%"> @obj.Undertaker.UndertakerName  </td>
+                    <td width="20%"> @obj.Undertaker.UndertakerName  </td>
                     <td width="10%"> @obj.DeathBurialMethod          </td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">

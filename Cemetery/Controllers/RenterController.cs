@@ -49,11 +49,18 @@ namespace Cemetery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(RenterVM obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Renters.Add(obj.Renter);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _db.Renters.Add(obj.Renter);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = Utility.Helper.CreateErrorMessage;
             }
             return View(obj);
         }
@@ -91,21 +98,32 @@ namespace Cemetery.Controllers
         //Post Edit
         public IActionResult Edit(RenterVM obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _db.Renters.Update(obj.Renter);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _db.Renters.Update(obj.Renter);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = Utility.Helper.EditErrorMessage;
             }
             return View(obj);
         }
 
         // Get Delete
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id, bool? saveChangesError)
         {
             if (id == null || id < 1)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = Utility.Helper.DeleteErrorMessage;
             }
             var obj = _db.Renters.Find(id);
             if (obj == null)
@@ -126,8 +144,15 @@ namespace Cemetery.Controllers
             {
                 return NotFound();
             }
-            _db.Renters.Remove(obj);
-            _db.SaveChanges();
+            try
+            {
+                _db.Renters.Remove(obj);
+                _db.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("Delete", new { id = RenterId, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
     }

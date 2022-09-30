@@ -4,11 +4,16 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Megváltások listája</h2>
+            <h2 class="text-primary">Az összes megváltás listája</h2>
         </div>
-        <div class="col-6 text-right">
+        <div class="col-3 text-right">
             <a asp-controller="Redemption" asp-action="Create" class="btn btn-primary">
                 Új megváltás felvétele
+            </a>
+        </div>
+        <div class="col-3 text-right">
+            <a asp-controller="Redemption" asp-action="GetLastRedemptions" class="btn btn-primary">
+                Legutolsó megváltások síronként
             </a>
         </div>
     </div>

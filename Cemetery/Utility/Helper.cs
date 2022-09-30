@@ -10,6 +10,9 @@ namespace Cemetery.Utility
     {
         public const string Admin = "Adminisztrátor";
         public const string Curious = "Érdeklődő";
+        public static string DeleteErrorMessage = "A törlési kísérlet sikertelen, ellenőrizze lehetséges-e végrehajtani a műveletet!";
+        public static string EditErrorMessage = "A frissítési kísérlet sikertelen, ellenőrizze lehetséges-e végrehajtani a műveletet!";
+        public static string CreateErrorMessage = "Az adatok felvétele sikertelen, ellenőrizze lehetséges-e végrehajtani a műveletet!";
         public static List<SelectListItem> GetRolesForDropDown(bool isAdmin)
         {
             if (isAdmin)

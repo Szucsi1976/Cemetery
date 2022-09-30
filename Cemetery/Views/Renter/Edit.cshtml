@@ -1,4 +1,6 @@
 ﻿@model Cemetery.Models.ViewModels.RenterVM
+@if (@ViewBag.Errormessage != null)
+{<p class="error">@ViewBag.Errormessage</p>}
 
 <form method="post">
     <input asp-for="Renter.RenterId" hidden />
